@@ -243,7 +243,7 @@
                                                     <div class="mb-3 position-relative">
 
                                                         <label for="payment_stripe_secret" class="form-label">Stripe Private Key</label>
-                                                        <input class="form-control" data-counter="250" placeholder="sk_*************" name="payment_stripe_secret" type="password">
+                                                        <input class="form-control" data-counter="250" name="payment_stripe_secret" type="password">
 
 
                                                     </div>
