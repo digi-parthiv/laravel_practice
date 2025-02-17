@@ -232,8 +232,7 @@
                                                         </label>
 
 
-                                                        <input class="form-control" data-counter="400" name="payment_stripe_client_id" type="text" value="pk_live_51OuL51P4oM1vuJoYWRXl1lWQiAX0w044qf9z2wCFMXaiIt7H2OEDmHLgOkhG21qDUti3dg2j28Yvl25BD4OwpwLB00W0OWQDMZ">
-
+                                                        <input class="form-control" data-counter="400" name="payment_stripe_client_id" type="text">
 
 
 
@@ -244,8 +243,7 @@
                                                     <div class="mb-3 position-relative">
 
                                                         <label for="payment_stripe_secret" class="form-label">Stripe Private Key</label>
-                                                        <input class="form-control" data-counter="250" placeholder="sk_*************" name="payment_stripe_secret" type="password" value="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" id="payment_stripe_secret">
-
+                                                        <input class="form-control" data-counter="250" placeholder="sk_*************" name="payment_stripe_secret" type="password">
 
 
                                                     </div>
