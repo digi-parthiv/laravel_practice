@@ -22,7 +22,8 @@ use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FrontController;
 use Illuminate\Support\Facades\Route;
-
+//files controller
+use App\Http\Controllers\Apps\Files\FilesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,6 +34,13 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+//files
+Route::get('/fileslist' , [FilesController::class , 'openFiles'])->name('fileslist');
+Route::get('/file_add' , [FilesController::class , 'addFile']);
+Route::post('/file_store' , [FilesController::class , 'fileStore'])->name('file.store');
+Route::get('/getFileList' , [FilesController::class , 'getFileList'])->name('get.filelist');
+Route::delete('/destroyFile/{id}' , [FilesController::class , 'destroyFile'])->name('destroy.File');
 
 Route::get('/', [FrontController::class, 'index'])->name('index');
 
@@ -48,6 +56,9 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
         Route::resource('/user-management/roles', RoleManagementController::class);
         Route::resource('/user-management/permissions', PermissionManagementController::class);
     });
+
+    
+
 
     Route::name('e-commerce.')->group(function () {
         Route::resource('/e-commerce/orders', OrdersController::class);
