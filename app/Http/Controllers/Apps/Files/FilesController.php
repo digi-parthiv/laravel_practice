@@ -24,11 +24,14 @@ class FilesController extends Controller
         $file = $request->file('fileUpload');
         $fileOriginalName = $file->getClientOriginalExtension();
         $fileNewName = time() . '.' . $fileOriginalName;
-        $file->storeAs('public/files', $fileNewName);
+        $filePath = $request->file('fileUpload')->store('uploads', 'public');
+       
+
         File::create([
             'file_type' => $request->file_type,
             'file' => $fileNewName,
         ]);
+
     }
     return redirect()->route('fileslist')->with('message', 'File Added');
 }
@@ -44,6 +47,8 @@ class FilesController extends Controller
                 ->editColumn('file', function($file){
                     // {{ asset('storage/files/' . $value->images }}
                     return '<img src="' . asset('storage/files/'.$file->file) . '" height="30px" width="30px" />';
+                    // return '<img src="' . url('files/' . $file->file) . '" height="30px" width="30px" />';
+
                 })
                 ->addColumn('action', function ($file) {
                     // $downloadBtn = '<a href="' . route('edit.editRole', $files->id) . '" class="btn btn-sm btn-primary">Edit</a>';
