@@ -13,7 +13,7 @@
     <meta property="og:type" content="article"/>
     <meta property="og:title" content=""/>
     <link rel="canonical" href="{{ url()->current() }}"/>
-
+    @stack('css')
     {!! includeFavicon() !!}
 
     <!--begin::Fonts-->
@@ -31,7 +31,6 @@
         {!! sprintf('<link rel="stylesheet" href="%s">', asset($path)) !!}
     @endforeach
     <!--end::Vendor Stylesheets-->
-
     <!--begin::Custom Stylesheets(optional)-->
     @foreach(getCustomCss() as $path)
         {!! sprintf('<link rel="stylesheet" href="%s">', asset($path)) !!}
