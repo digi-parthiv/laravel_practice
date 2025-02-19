@@ -49,7 +49,7 @@
 	            <select class=" form-select" id="product-category-select" name="file_type">
                    <option value="img">img</option>
                    <option value="pdf" >pdf</option>
-                   <option value="txt" >txt</option>
+                   <option value="video" >video</option>
 		       	</select>
             </div>
 	        <!-- File Upload Input Group -->

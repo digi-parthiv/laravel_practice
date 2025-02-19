@@ -38,29 +38,20 @@ class FilesController extends Controller
     public function getFileList(Request $request)
     {
          
-        if ($request->ajax()) {
-        // dd("hi");
-         
+        if ($request->ajax()) {         
             $files = File::all();
-
             return DataTables::of($files)
                 ->editColumn('file', function($file){
 
                     if ($file->file_type == 'img') {
                         return '<img src="' . asset('storage/files/'.$file->file) . '" height="70px" width="70px" />';
                     }
-                    //if fileType is txt
-                    if ($file->file_type == 'txt') {
+                    if ($file->file_type == 'video') {
                         return '<i class="fa-regular fa-file"></i>'." ".$file->file;
                     }
                     if ($file->file_type == 'pdf') {
                         return '<i class="fa-solid fa-file-pdf"></i>'." ".$file->file;
                     }
-
-
-
-                    // return '<img src="' . asset('storage/files/'.$file->file) . '" height="70px" width="70px" />';
-                    // return '<img src="' . url('files/' . $file->file) . '" height="30px" width="30px" />';
                 })
                 ->addColumn('action', function ($file) {
                     // $downloadBtn = '<a href="' . route('edit.editRole', $files->id) . '" class="btn btn-sm btn-primary">Edit</a>';
@@ -76,14 +67,16 @@ class FilesController extends Controller
     public function destroyFile($id){
         $file = File::find($id);
         $file_name = File::where('id', $id)->first()->file;
-        if(file_exists('app/public/files/'.$file_name)){
+        if(file_exists(storage_path('app/public/files/'.$file_name))){
             unlink(storage_path('app/public/files/'.$file_name));
+            return response()->json(['message' => 'file deleted successfully']);
         }else{
-            echo"File does not exist";
-        }
-        $file->delete();
+           $file->delete();
+           return response()->json(['message' => 'file deleted successfully']);
+
+         }
+      
         // Storage::disk('local')->delete('storage/files/'.$file_name);
-        return response()->json(['message' => 'file deleted successfully']);
     }
 
 }
