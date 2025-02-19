@@ -37,44 +37,58 @@
         <!--end::Card header-->
 
         <!--begin::Card body-->
-	<form method="post" action="{{route('file.store')}}" enctype="multipart/form-data">
+	<form method="post" action="{{route('file.store')}}" enctype="multipart/form-data" id="filedata">
 	 @csrf
 
-				    <div class="card-body py-4">
-				        <!-- File Type Input -->
-				       <select class="product-category-select" id="product-category-select" name="file_type">
-                            <option value="img">img</option>
-                            <option value="pdf" >pdf</option>
-							<option value="php" >php</option>
-						</select>
-				        <!-- File Upload Input Group -->
-				        <div class="input-group mb-3">
-				            <input type="file" class="form-control" id="inputGroupFile04" name="fileUpload" >
-				            <button class="btn btn-outline-secondary" type="button">Upload</button>
-				        </div>
+	    <div class="card-body py-4">
+	        <!-- File Type Input -->
+            <div class="mb-3 position-relative">
+            <label class="form-label">File Type:</label>
+            </div>
+            <div class="mb-3 position-relative">
+	            <select class=" form-select" id="product-category-select" name="file_type">
+                   <option value="img">img</option>
+                   <option value="pdf" >pdf</option>
+                   <option value="txt" >txt</option>
+		       	</select>
+            </div>
+	        <!-- File Upload Input Group -->
+	        <div class="input-group mb-3">
+	            <input type="file" class="fileUpload form-control" id="inputGroupFile04" name="fileUpload" >
+	            <button class="btn btn-outline-secondary" type="button">Upload</button>
+	        </div>
 
-				        <!-- Submit Button -->
-				        <button type="submit" class="btn btn-primary">Submit</button>
-				    </div>
-				</form>
+	        <!-- Submit Button -->
+	        <button type="submit" class="btn btn-primary">Submit</button>
+	    </div>
+	</form>
 
         <!--end::Card body-->
     </div>
 
     @push('scripts')
-        <script>
-            document.getElementById('mySearchInput').addEventListener('keyup', function () {
-                window.LaravelDataTables['products-table'].search(this.value).draw();
-            });
-            document.addEventListener('livewire:init', function () {
-                Livewire.on('success', function () {
-                    $('#kt_modal_add_user').modal('hide');
-                    window.LaravelDataTables['products-table'].ajax.reload();
-                });
-            });
-            $('#kt_modal_add_user').on('hidden.bs.modal', function () {
-                Livewire.dispatch('new_user');
-            });
-        </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <script>
+         $(document).ready(function(){
+             $('#filedata').validate({
+               rules: {
+                fileUpload:{
+                    required:true,
+                }
+               },
+               messages: {
+                 fileUpload: "Please Upload file first."
+               }
+             });
+
+             $('#product-category-select').change(function(event) {
+                $('#inputGroupFile04').attr('accept', '.'+this.value)
+                 alert(this.value);
+             });
+           });
+
+    </script>
+        
     @endpush
 </x-default-layout>

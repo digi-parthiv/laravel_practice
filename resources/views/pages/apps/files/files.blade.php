@@ -9,6 +9,7 @@
                     
                 <div class="d-flex align-items-center position-relative my-1">
                     <h1>Files</h1> 
+
                 </div>
                 <!--end::Search-->
             </div>
@@ -17,14 +18,15 @@
             <!--begin::Card toolbar-->
             <div class="card-toolbar">
                 <!--begin::Toolbar-->
-                <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
+                <div class="d-flex justify-content-right" data-kt-user-table-toolbar="base">
                     <!--begin::Add user-->
-                    <a href ="file_add">
-                    	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
+                        <button onclick="location.href='{{ url('file_add') }}'" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
                         {!! getIcon('plus', 'fs-2', '', 'i') !!}
                         Create
-                    	</button>
-                    </a>
+                        </button>
+                    <!-- <a href ="">
+                    	
+                    </a> -->
                     <!--end::Add user-->
                 </div>
                 <!--end::Toolbar-->
@@ -48,10 +50,10 @@
     <table class="table table-bordered data-table">
         <thead>
             <tr>
-                <th>ID</th>
+                <th width="130px">ID</th>
                 <th>FileType</th>
                 <th>File</th>
-                <th width="100px">Action</th>
+                <th width="250px">Action</th>
             </tr>
         </thead>
          <tbody>
@@ -77,7 +79,7 @@
 		        var id = $(this).attr('data-id');
 		        if(confirm("Are you sure you want to delete this user ?")){
 		            $.ajax({
-		                url:"destroyFile/" + id,
+		                url:"destroyFile/" + id ,
 		                type:"DELETE",
 		                data:{ _token:"{{ csrf_token() }}"},
 		                success: function(response){
