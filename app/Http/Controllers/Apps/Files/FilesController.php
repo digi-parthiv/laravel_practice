@@ -7,46 +7,40 @@ use Illuminate\Http\Request;
 use App\Models\File;
 use Yajra\DataTables\DataTables;
 
-
 class FilesController extends Controller
 {
     public function openFiles(){
-
         return view('pages.apps.files.files');
-
     }
+
     public function addFile(){
         return view('pages.apps.files.add_file');
     }
-    public function fileStore(Request $request)
-{
-    if ($request->file('fileUpload')->isValid()) {
-        $file = $request->file('fileUpload');
-        $fileOriginalName = $file->getClientOriginalExtension();
-        $fileNewName = time() . '.' . $fileOriginalName;
-        $filePath = $request->file('fileUpload')->storeAs('files', $fileNewName,'public');
 
+    public function fileStore(Request $request){
+        if ($request->file('fileUpload')->isValid()) {
+            $file = $request->file('fileUpload');
+            $fileOriginalName = $file->getClientOriginalExtension();
+            $fileNewName = time() . '.' . $fileOriginalName;
+            $filePath = $request->file('fileUpload')->storeAs('files', $fileNewName,'public');
 
-        File::create([
-            'file_type' => $request->file_type,
-            'file' => $fileNewName,
-        ]);
-
+            File::create([
+                'file_type' => $request->file_type,
+                'file' => $fileNewName,
+            ]);
+        }
+        return redirect()->route('fileslist')->with('message', 'File Added');
     }
-    return redirect()->route('fileslist')->with('message', 'File Added');
-}
-    public function getFileList(Request $request)
-    {
-         
+
+    public function getFileList(Request $request){   
         if ($request->ajax()) {         
             $files = File::all();
             return DataTables::of($files)
                 ->editColumn('file', function($file){
-
                     if ($file->file_type == 'img') {
                         return '<img src="' . asset('storage/files/'.$file->file) . '" height="70px" width="70px" />';
                     }
-                    if ($file->file_type == 'video') {
+                    if ($file->file_type == 'txt') {
                         return '<i class="fa-regular fa-file"></i>'." ".$file->file;
                     }
                     if ($file->file_type == 'pdf') {
@@ -64,19 +58,19 @@ class FilesController extends Controller
         }
         return view('pages.apps.files.files');
     }
+
     public function destroyFile($id){
         $file = File::find($id);
         $file_name = File::where('id', $id)->first()->file;
         if(file_exists(storage_path('app/public/files/'.$file_name))){
             unlink(storage_path('app/public/files/'.$file_name));
+           $file->delete();
             return response()->json(['message' => 'file deleted successfully']);
         }else{
            $file->delete();
            return response()->json(['message' => 'file deleted successfully']);
 
          }
-      
-        // Storage::disk('local')->delete('storage/files/'.$file_name);
     }
 
 }

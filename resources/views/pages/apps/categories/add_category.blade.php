@@ -15,36 +15,28 @@
         <div class="card-title">
             <!--begin::Search-->
             <div class="d-flex align-items-center position-relative my-1">
-                <h1>Add File</h1>
+                <h1>Add Category</h1>
             </div>
             <!--end::Search-->
         </div>
         <!--begin::Card title-->
     </div>
 
-	<form method="post" action="{{route('file.store')}}" enctype="multipart/form-data" id="fileUploadForm">
+	<form method="post" action="{{route('category.store')}}" enctype="multipart/form-data" id="fileUploadForm">
 	   @csrf
 	    <div class="card-body py-4">
 	        <!-- File Type Input -->
-            <div class="mb-3 position-relative">
-                <label class="form-label">File Type:</label>
-            </div>
-            <div class="mb-3 position-relative">
-	            <select class="form-select" id="product-category-select" name="file_type">
-                   <option value="">Select File Type</option>
-                   <option value="img">img</option>
-                   <option value="pdf" >pdf</option>
-                   <option value="txt" >txt</option>
-		       	</select>
-                <h4 class="errorTxt"></h4> 
-            </div>
+
 	        <!-- File Upload Input Group -->
+                <div class="mb-3 position-relative">
+                    <label class="form-label">Category name:</label>
+                </div>
 	        <div class="input-group mb-3">
-	            <input type="file" class="fileUpload form-control" id="inputGroupFile04" name="fileUpload">
+	            <input type="text" class="categoryAdd form-control" id="categoryAdd" name="name">
 	        </div>
             <p id="missMatchError"></p>
 	        <!-- Submit Button -->
-	        <button type="submit" class="submit btn btn-primary">Submit</button>
+	        <button type="submit" class="submit btn btn-primary">+ Add</button>
 	    </div>
 	</form>
 </div>
