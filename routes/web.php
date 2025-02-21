@@ -37,23 +37,12 @@ use App\Http\Controllers\Apps\Files\CategoryController;
 
 //files
 
-    Route::delete('/destroyCategory/{id?}' , [CategoryController::class , 'destroyCategory'])->name('destroy.Category');
+
 Route::get('/',function(){
     return view('pages.auth.login');
 });
 Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
 
-    Route::get('/fileslist' , [FilesController::class , 'openFiles'])->name('fileslist');
-    Route::get('/file_add' , [FilesController::class , 'addFile']);
-    Route::post('/file_store' , [FilesController::class , 'fileStore'])->name('file.store');
-    Route::get('/getFileList' , [FilesController::class , 'getFileList'])->name('get.filelist');
-    Route::delete('/destroyFile/{id}' , [FilesController::class , 'destroyFile'])->name('destroy.File');
-
-
-    Route::get('/category' , [CategoryController::class , 'openCategory'])->name('CategoryList');
-    Route::get('/category_add' , [CategoryController::class , 'addCategory']);
-    Route::post('/category_store' , [CategoryController::class , 'categoryStore'])->name('category.store');
-    Route::get('/getCategoryList' , [CategoryController::class , 'getCategoryList'])->name('getCategoryList');
 
     Route::get('/', [DashboardController::class, 'index']);
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -66,6 +55,17 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
     });
 
     
+    Route::get('/fileslist' , [FilesController::class , 'openFiles'])->name('fileslist');
+    Route::get('/file_add' , [FilesController::class , 'addFile']);
+    Route::post('/file_store' , [FilesController::class , 'fileStore'])->name('file.store');
+    Route::get('/getFileList' , [FilesController::class , 'getFileList'])->name('get.filelist');
+    Route::delete('/destroyFile/{id}' , [FilesController::class , 'destroyFile'])->name('destroy.File');
+
+    Route::get('/category' , [CategoryController::class , 'openCategory'])->name('CategoryList');
+    Route::get('/category_add' , [CategoryController::class , 'addCategory']);
+    Route::post('/category_store' , [CategoryController::class , 'categoryStore'])->name('category.store');
+    Route::get('/getCategoryList' , [CategoryController::class , 'getCategoryList'])->name('get.CategoryList');
+    Route::delete('/destroyCategory/{id}' , [CategoryController::class , 'destroyCategory'])->name('destroy.Category');
 
 
     Route::name('e-commerce.')->group(function () {

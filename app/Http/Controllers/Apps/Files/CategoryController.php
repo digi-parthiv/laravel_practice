@@ -43,7 +43,6 @@ class CategoryController extends Controller
     }
 
     public function destroyCategory($id){
-        dd($id);
         $category= Category::find($id);
         $category->delete();
         return response()->json(['message' => 'file deleted successfully']);

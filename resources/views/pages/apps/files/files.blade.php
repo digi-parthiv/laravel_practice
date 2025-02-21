@@ -62,7 +62,7 @@
     	        var id = $(this).attr('data-id');
     	        if(confirm("Are you sure you want to delete this file ?")){
     	            $.ajax({
-    	                url:"/destroyFile/" + id,
+    	                url:"destroyFile/" + id,
     	                type:"DELETE",
     	                data:{ _token:"{{ csrf_token() }}"},
     	                success: function(response){

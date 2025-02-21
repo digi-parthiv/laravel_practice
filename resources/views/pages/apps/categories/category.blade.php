@@ -59,9 +59,10 @@
 		$('.data-table').on('click','.delete',function(){
     	        var id = $(this).attr('data-id');
     	        if(confirm("Are you sure you want to delete this category ?")){
-    	            $.ajax({
-    	                url:"{{ url('destroyCategory') }}/"+id,
-    	                type:"delete",
+    	            $.ajax({   
+    	                url:"destroyCategory/" + id,
+    	                type:"DELETE",
+                        data:{ _token:"{{ csrf_token() }}"},
     	                success: function(response){
     	                    alert(response.message);
     	                    table.ajax.reload();
