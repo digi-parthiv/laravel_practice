@@ -20,10 +20,10 @@ use App\Http\Controllers\Apps\ShipmentController;
 use App\Http\Controllers\Apps\UserManagementController;
 use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\FrontController;
 use Illuminate\Support\Facades\Route;
 //files controller
 use App\Http\Controllers\Apps\Files\FilesController;
+use App\Http\Controllers\Apps\Files\CategoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,18 +36,15 @@ use App\Http\Controllers\Apps\Files\FilesController;
 */
 
 //files
-Route::get('/fileslist' , [FilesController::class , 'openFiles'])->name('fileslist');
-Route::get('/file_add' , [FilesController::class , 'addFile']);
-Route::post('/file_store' , [FilesController::class , 'fileStore'])->name('file.store');
-Route::get('/getFileList' , [FilesController::class , 'getFileList'])->name('get.filelist');
-Route::delete('/destroyFile/{id}' , [FilesController::class , 'destroyFile'])->name('destroy.File');
 
-Route::get('/', [FrontController::class, 'index'])->name('index');
 
+Route::get('/',function(){
+    return view('pages.auth.login');
+});
 Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
 
-    Route::get('/', [DashboardController::class, 'index']);
 
+    Route::get('/', [DashboardController::class, 'index']);
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/newsletters', [NewslettersController::class, 'index'])->name('newsletters');
 
@@ -58,6 +55,17 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
     });
 
     
+    Route::get('/fileslist' , [FilesController::class , 'openFiles'])->name('fileslist');
+    Route::get('/file_add' , [FilesController::class , 'addFile']);
+    Route::post('/file_store' , [FilesController::class , 'fileStore'])->name('file.store');
+    Route::get('/getFileList' , [FilesController::class , 'getFileList'])->name('get.filelist');
+    Route::delete('/destroyFile/{id}' , [FilesController::class , 'destroyFile'])->name('destroy.File');
+
+    Route::get('/category' , [CategoryController::class , 'openCategory'])->name('CategoryList');
+    Route::get('/category_add' , [CategoryController::class , 'addCategory']);
+    Route::post('/category_store' , [CategoryController::class , 'categoryStore'])->name('category.store');
+    Route::get('/getCategoryList' , [CategoryController::class , 'getCategoryList'])->name('get.CategoryList');
+    Route::delete('/destroyCategory/{id}' , [CategoryController::class , 'destroyCategory'])->name('destroy.Category');
 
 
     Route::name('e-commerce.')->group(function () {

@@ -25,18 +25,20 @@
 				<!--end:Menu content-->
 			</div>
 			<!--end:Menu item-->
-			<!--begin:Menu item-->
 			<div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ request()->routeIs('e-commerce.*') ? 'here show' : '' }}">
-			<!--begin:Menu link-->
-				<a href="{{ url('fileslist') }} ">
+				<a href="{{ url('admin/fileslist') }} ">
     				<span class="menu-link">
                             <span class="menu-title">Files</span>
     				</span>
                 <a>
             </div>
-				<!--end:Menu link-->
-		
-			<!--end:Menu item-->
+		    <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ request()->routeIs('e-commerce.*') ? 'here show' : '' }}">
+				<a href="{{ url('admin/category') }} ">
+    				<span class="menu-link">
+                            <span class="menu-title">category</span>
+    				</span>
+                <a>
+            </div>
 		</div>
 		<!--end::Menu-->
 	</div>
